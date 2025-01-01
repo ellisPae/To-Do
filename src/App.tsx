@@ -57,24 +57,61 @@ const App: FC = () => {
         <button type="submit">Add Task</button>
       </form>
 
-      <ul>
-        {todos.map((todo) => (
-          <li
-            key={todo.id}
-            style={{
-              textDecoration: todo.completed ? "line-through" : "none",
-            }}
-          >
-            {todo.text}{" "}
-            <input
-              type="checkbox"
-              checked={todo.completed}
-              onChange={() => handleToggleComplete(todo.id)}
-            />
-            <button onClick={() => handleDeleteTodo(todo.id)}>Delete</button>
-          </li>
-        ))}
-      </ul>
+      <table style={{ marginTop: "1rem", borderCollapse: "collapse" }}>
+        <thead>
+          <tr>
+            <th style={{ border: "1px solid #ccc", padding: "8px" }}>#</th>
+            <th style={{ border: "1px solid #ccc", padding: "8px" }}>Task</th>
+            <th style={{ border: "1px solid #ccc", padding: "8px" }}>
+              Completed
+            </th>
+            <th style={{ border: "1px solid #ccc", padding: "8px" }}>
+              Actions
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {todos.map((todo, index) => (
+            <tr key={todo.id}>
+              <td style={{ border: "1px solid #ccc", padding: "8px" }}>
+                {index + 1}
+              </td>
+              <td
+                style={{
+                  border: "1px solid #ccc",
+                  padding: "8px",
+                  textDecoration: todo.completed ? "line-through" : "none",
+                }}
+              >
+                {todo.text}
+              </td>
+              <td
+                style={{
+                  border: "1px solid #ccc",
+                  padding: "8px",
+                  textAlign: "center",
+                }}
+              >
+                <input
+                  type="checkbox"
+                  checked={todo.completed}
+                  onChange={() => handleToggleComplete(todo.id)}
+                />
+              </td>
+              <td
+                style={{
+                  border: "1px solid #ccc",
+                  padding: "8px",
+                }}
+              >
+                <button onClick={() => handleDeleteTodo(todo.id)}>
+                  Delete
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };
